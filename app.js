@@ -101,7 +101,6 @@ let resultHandler = (req, res, next) =>
     // res.json(new Response(res.s || 1).setMessage(res.m || "Success").
     // setPagination(res.tr, res.page, res.pages, res.c).
     // setResultData(res.r).build())
-
     res.sendResult = function() {
         return res.json(new Response(res.s || 1).setMessage(res.m || "Success").
             setPagination(res.tr, res.page, res.pages, res.c).
