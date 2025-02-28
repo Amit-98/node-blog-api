@@ -12,22 +12,22 @@ const db_config = {
     queueLimit:50
   },
   devlopment: {
-    user: "root",
-    host: "localhost",
-    password: "Amit@145",
+    user: "admin",
+    host: "database-1.cnskekiae10r.ap-south-1.rds.amazonaws.com",
+    password: "Amit##145",
     database: "blog",
     port:3306,
     connectionLimit: 5000,
+    queueLimit:50
   },
   production: {
-    user: "root",
-    host: "autorack.proxy.rlwy.net",
-    password: "wmIJSxoHrnBAzhiGivXRfjfXLPwavwjc",
-    database: "railway",
-    port:15293,
-    waitForConnections:true,
-    connectionLimit: 1000,
-    queueLimit:0
+    user: "admin",
+    host: "database-1.cnskekiae10r.ap-south-1.rds.amazonaws.com",
+    password: "Amit##145",
+    database: "blog",
+    port:3306,
+    connectionLimit: 5000,
+    queueLimit:50
   },
 };
 

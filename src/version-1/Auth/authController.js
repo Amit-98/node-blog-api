@@ -22,50 +22,19 @@ let authSignup = async (req, res, next) =>
             if(resultSignup)
             {
                 req.body.userId = resultSignup.insertId; 
-                let resultToken = await _queryBuilder.authSignupToken(req);
-                if(resultToken)
+                let resultTokenIns = await _queryBuilder.authSignupToken(req);
+                const resultRoleIns = await _queryBuilder.authRole(req);
+                const resultAuthSuccess = await _queryBuilder.authSuccess(req);
+                if(resultAuthSuccess)
                 {
-                    const resultRole = await _queryBuilder.authRole(req);
-                    if(resultRole)
-                    {
-                        const resultAuthSuccess = await _queryBuilder.authSuccess(req);
-                        if(resultAuthSuccess)
-                        {
-                            const resultAuthToken = await _queryBuilder.authTokenSuccess(req);
-                            const resultRole = await _queryBuilder.authRoleSuccess(req);
-
-                            if(resultAuthSuccess && resultRole)
-                            {
-                                resultAuthSuccess.userAuthToken = resultAuthToken;
-                                resultAuthSuccess.userRole = resultRole;
-                                res.s = 1;
-                                res.m = "Signup successfully";
-                                res.r = resultAuthSuccess;
-                                return res.sendResult();
-                            }
-                            else
-                            {
-                                res.s = 1;
-                                res.m = "Record not found";
-                                res.r = {};
-                                return res.sendResult();
-                            }
-                        }
-                        else
-                        {
-                            res.s = 1;
-                            res.m = "Record not found";
-                            res.r = {};
-                            return res.sendResult();
-                        }
-                    }
-                    else
-                    {
-                        res.s = 1;
-                        res.m = "Record not found";
-                        res.r = {};
-                        return res.sendResult();
-                    }
+                    const resultAuthToken = await _queryBuilder.authTokenSuccess(req);
+                    const resultRole = await _queryBuilder.authRoleSuccess(req);
+                    resultAuthSuccess.userAuthToken = resultAuthToken;
+                    resultAuthSuccess.userRole = resultRole;
+                    res.s = 1;
+                    res.m = "Signup successfully";
+                    res.r = resultAuthSuccess;
+                    return res.sendResult();
                 }
                 else
                 {
@@ -78,8 +47,7 @@ let authSignup = async (req, res, next) =>
             else
             {
                 res.s = 1;
-                res.m = "Record not found";
-                res.r = {};
+                res.m = "Something went wrong!";
                 return res.sendResult();
             }
         }
